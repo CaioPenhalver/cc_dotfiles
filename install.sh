@@ -14,8 +14,8 @@ then
     Linux )
       if [ "$(cat /etc/os-release | egrep '^ID=(.*)' |  cut -d '=' -f 2-)" == "manjaro" ]
       then
+        echo "Manjaro"
         curl -sSL https://get.rvm.io | bash -s stable --ruby
-        # install yarn
         sudo pacman -S --noconfirm --needed nodejs \
           the_silver_searcher \
           xclip \
@@ -28,6 +28,7 @@ then
           bison \
           pkgconf
       else
+        echo "Manjaro"
         echo "  - vim (vim-gnome)"
         NODE_VERSION=12
 
