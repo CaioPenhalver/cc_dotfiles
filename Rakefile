@@ -107,15 +107,18 @@ def linux?
 end
 
 def linux_distro
-  if File.exists?('/etc/lsb-release')
+  return unless File.exists?('/etc/lsb-release')
     File.open('/etc/lsb-release', 'r').read.each_line do |line|
-      r = { :distro => $1 } if line =~ /^DISTRIB_ID=(.*)/
+      return $1 if line =~ /^DISTRIB_ID=(.*)/
     end
-  end
+end
+
+def ubuntu?
+  @ubuntu ||= linux_distro == 'Ubuntu'
 end
 
 def manjaro?
-  linux_distro == 'ManjaroLinux'
+  @manjaro ||= linux_distro == 'ManjaroLinux'
 end
 
 def linux_message
@@ -133,13 +136,12 @@ def installation_message
   puts 'Thank you!'
   puts ''
   puts ''
-  linux_message if linux?
+  linux_message if ubuntu?
   puts '======================================================================='
 end
 
 def install_prereqs
   run_command %{ $HOME/.cc_dotfiles/mac.sh } if macos?
-  run_command %{ $HOME/.cc_dotfiles/ubuntu.sh } if linux?
   run_command %{ $HOME/.cc_dotfiles/ubuntu.sh } if ubuntu?
-  run_command %{ $HOME/.cc_dotfiles/ubuntu.sh } if manjaro?
+  run_command %{ $HOME/.cc_dotfiles/manjaro.sh } if manjaro?
 end
