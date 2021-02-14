@@ -27,7 +27,6 @@ then
           ncurses \
           bison \
           pkgconf
-        ;;
       else
         echo "  - vim (vim-gnome)"
         NODE_VERSION=12
@@ -54,8 +53,8 @@ then
           ncurses-dev \
           bison \
           pkg-config
-        ;;
       if
+      ;;
     Darwin )
       echo "  - vim (macvim)"
       echo "  - google-chrome (mac)"
