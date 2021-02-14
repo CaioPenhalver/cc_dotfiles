@@ -53,7 +53,7 @@ then
           ncurses-dev \
           bison \
           pkg-config
-      if
+      fi
       ;;
     Darwin )
       echo "  - vim (macvim)"
