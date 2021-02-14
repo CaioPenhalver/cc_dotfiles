@@ -11,7 +11,7 @@ then
   echo "  - nodejs"
 
   case "$(uname -s)" in
-    Linux)
+    Linux )
       if [ "$(lsb_release -ds)" == "Manjaro Linux"]
       then
         curl -sSL https://get.rvm.io | bash -s stable --ruby
@@ -54,7 +54,7 @@ then
           bison \
           pkg-config
       fi
-      ;;
+      
     Darwin )
       echo "  - vim (macvim)"
       echo "  - google-chrome (mac)"
