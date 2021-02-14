@@ -12,32 +12,50 @@ then
 
   case "$(uname -s)" in
     Linux)
-      echo "  - vim (vim-gnome)"
-      NODE_VERSION=12
+      if [ "$(lsb_release -ds)" == "Manjaro Linux"]
+      then
+        curl -sSL https://get.rvm.io | bash -s stable --ruby
+        # install yarn
+        sudo pacman -S --noconfirm --needed nodejs \
+          the_silver_searcher \
+          xclip \
+          zsh \
+          dconf \
+          gtk3 \
+          yarn \
+          ruby \
+          ncurses \
+          bison \
+          pkgconf
+        ;;
+      else
+        echo "  - vim (vim-gnome)"
+        NODE_VERSION=12
 
-      sudo apt-get update
-      sudo apt-get install -y software-properties-common gnupg2
-      gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-      curl -sSL https://get.rvm.io | bash -s stable --ruby
-      curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo -E bash -
-      curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-      echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common gnupg2
+        gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+        curl -sSL https://get.rvm.io | bash -s stable --ruby
+        curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo -E bash -
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+        echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
-      sudo apt-get install -y silversearcher-ag \
-        git \
-        xclip \
-        build-essential \
-        zsh \
-        dconf-cli \
-        vim-gtk3 \
-        nodejs \
-        yarn \
-        ruby \
-        libevent-dev \
-        ncurses-dev \
-        bison \
-        pkg-config
-      ;;
+        sudo apt-get install -y silversearcher-ag \
+          git \
+          xclip \
+          build-essential \
+          zsh \
+          dconf-cli \
+          vim-gtk3 \
+          nodejs \
+          yarn \
+          ruby \
+          libevent-dev \
+          ncurses-dev \
+          bison \
+          pkg-config
+        ;;
+      if
     Darwin )
       echo "  - vim (macvim)"
       echo "  - google-chrome (mac)"
@@ -54,7 +72,7 @@ then
       return
       ;;
     *)
-      echo 'Operational system not recognized, aborting installation'
+      echo 'Operating system not recognized, aborting installation'
       return
       ;;
   esac

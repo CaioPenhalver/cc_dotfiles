@@ -106,6 +106,18 @@ def linux?
   RUBY_PLATFORM.downcase.include?("linux")
 end
 
+def linux_distro
+  if File.exists?('/etc/lsb-release')
+    File.open('/etc/lsb-release', 'r').read.each_line do |line|
+      r = { :distro => $1 } if line =~ /^DISTRIB_ID=(.*)/
+    end
+  end
+end
+
+def manjaro?
+  linux_distro == 'ManjaroLinux'
+end
+
 def linux_message
   puts ''
   puts "- Change your terminal window to Run command as login shell and RESTART"
@@ -128,4 +140,6 @@ end
 def install_prereqs
   run_command %{ $HOME/.cc_dotfiles/mac.sh } if macos?
   run_command %{ $HOME/.cc_dotfiles/ubuntu.sh } if linux?
+  run_command %{ $HOME/.cc_dotfiles/ubuntu.sh } if ubuntu?
+  run_command %{ $HOME/.cc_dotfiles/ubuntu.sh } if manjaro?
 end
