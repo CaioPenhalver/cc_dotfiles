@@ -54,7 +54,7 @@ then
           bison \
           pkg-config
       fi
-      
+      ;;
     Darwin )
       echo "  - vim (macvim)"
       echo "  - google-chrome (mac)"
