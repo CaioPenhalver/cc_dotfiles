@@ -16,7 +16,7 @@ then
       then
         echo "Manjaro"
         curl -sSL https://get.rvm.io | bash -s stable --ruby
-        sudo pacman -S --noconfirm --needed nodejs \
+        sudo pacman -Sy --noconfirm --needed nodejs \
           the_silver_searcher \
           xclip \
           zsh \
@@ -28,7 +28,7 @@ then
           bison \
           pkgconf
       else
-        echo "Manjaro"
+        echo "Ubuntu"
         echo "  - vim (vim-gnome)"
         NODE_VERSION=12
 
