@@ -12,7 +12,7 @@ then
 
   case "$(uname -s)" in
     Linux )
-      if [ "$(lsb_release -ds)" == "Manjaro Linux"]
+      if [ "$(cat /etc/os-release | egrep '^ID=(.*)' |  cut -d '=' -f 2-)" == "manjaro"]
       then
         curl -sSL https://get.rvm.io | bash -s stable --ruby
         # install yarn

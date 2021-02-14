@@ -107,18 +107,18 @@ def linux?
 end
 
 def linux_distro
-  return unless File.exists?('/etc/lsb-release')
-    File.open('/etc/lsb-release', 'r').read.each_line do |line|
-      return $1 if line =~ /^DISTRIB_ID=(.*)/
+  return unless File.exists?('/etc/os-release')
+    File.open('/etc/os-release', 'r').read.each_line do |line|
+      return $1 if line =~ /^ID=(.*)/
     end
 end
 
 def ubuntu?
-  @ubuntu ||= linux_distro == 'Ubuntu'
+  @ubuntu ||= linux_distro == 'ubuntu'
 end
 
 def manjaro?
-  @manjaro ||= linux_distro == 'ManjaroLinux'
+  @manjaro ||= linux_distro == 'manjaro'
 end
 
 def linux_message
